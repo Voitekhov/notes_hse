@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/notes
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:89223S}

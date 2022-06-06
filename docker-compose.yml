@@ -1,0 +1,24 @@
+services:
+  springboot-app:
+    image: notes_backend
+    restart: always
+    build: ./docker/backend/
+    container_name: notes_backend_container
+    ports:
+      - "8080:8080"
+    environment:
+      POSTGRES_HOST: notes_postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_PORT: 5432
+  database:
+    container_name: notes_postgres
+    build: ./docker/database/
+    ports:
+      - "8912:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: notes
+
+
