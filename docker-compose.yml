@@ -3,6 +3,8 @@ services:
     image: notes_backend
     restart: always
     build: ./docker/backend/
+    volumes:
+      - ./docker/backend/firebase_service_account_key.json:/firebase_service_account_key.json
     container_name: notes_backend_container
     ports:
       - "8080:8080"
@@ -13,7 +15,9 @@ services:
       POSTGRES_PORT: 5432
   database:
     container_name: notes_postgres
-    build: ./docker/database/
+    image: postgres
+    volumes:
+          - ./docker/database/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "8912:5432"
     environment:

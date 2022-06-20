@@ -6,7 +6,7 @@ import java.io.FileInputStream
 var FIREBASE_APP: FirebaseApp = initializeFirebaseApp()
 
 fun initializeFirebaseApp(): FirebaseApp {
-    FileInputStream("/keysfirebase").use { fis -> //or implicit `it`
+    FileInputStream("firebase_service_account_key.json").use { fis -> //or implicit `it`
         val options = FirebaseOptions.builder().setCredentials(GoogleCredentials.fromStream(fis)).build()
         return FirebaseApp.initializeApp(options)
     }

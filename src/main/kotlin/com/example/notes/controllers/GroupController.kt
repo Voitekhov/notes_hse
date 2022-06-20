@@ -5,7 +5,7 @@ import com.example.notes.service.DtoToEntityConvertService
 import com.example.notes.service.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import java.lang.IllegalArgumentException
+import java.lang.RuntimeException
 
 @RestController
 @RequestMapping("/groups/")
