@@ -1,7 +1,6 @@
 package com.example.notes.service
 
 import FIREBASE_APP
-import com.example.notes.model.LoginUser
 import com.example.notes.model.User
 import com.example.notes.repository.UserJPA
 import com.google.firebase.auth.FirebaseAuth
@@ -21,7 +20,7 @@ class UserVerificationService {
         val email = FirebaseAuth.getInstance(FIREBASE_APP).verifyIdToken(token).email ?: throw RuntimeException("Can't verify user")
         val authentication = SecurityContextHolder.getContext().authentication
 
-        if (authentication !=null && email == authentication.principal) {
+        if (authentication != null && email == authentication.principal) {
             return (authentication.principal as User)
         }
         val user: User = userJPA.getByEmail(email)

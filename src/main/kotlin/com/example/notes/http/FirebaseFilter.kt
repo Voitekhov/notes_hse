@@ -24,7 +24,11 @@ class FirebaseFilter : OncePerRequestFilter() {
 
     @ExceptionHandler(IllegalStateException::class)
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        println("HEAR!")
+        //TODO refactor spring security conf
+        if (request.requestURL.endsWith("/user/save")) {
+            filterChain.doFilter(request, response)
+            return
+        }
         if (userVerificationService == null) {
             val servletContext = request.servletContext
             val webApplicationContext: WebApplicationContext =

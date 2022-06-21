@@ -1,6 +1,7 @@
 package com.example.notes.conf
 
 import com.example.notes.http.FirebaseFilter
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -14,10 +15,14 @@ import org.springframework.security.web.context.SecurityContextPersistenceFilter
 @EnableWebSecurity
 class SecuretyConfig : WebSecurityConfigurerAdapter() {
 
+    @Autowired
+    lateinit var firebaseFilter: FirebaseFilter
+
     // clear context FilterChainProxy
+    //SecurityContextPersistenceFilter
     override fun configure(http: HttpSecurity) {
         // TODO ты вообще вменяемый??
-        http.addFilterAt(FirebaseFilter(), SecurityContextPersistenceFilter::class.java)
+        http.addFilterAt(firebaseFilter, SecurityContextPersistenceFilter::class.java)
             .csrf().disable()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -26,7 +31,7 @@ class SecuretyConfig : WebSecurityConfigurerAdapter() {
 
     }
 
-  /*  @PostConstruct
+    /*  @PostConstruct
     fun enableAuthCtxOnSpawnedThreads() {
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_GLOBAL)
     }
