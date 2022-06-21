@@ -22,7 +22,7 @@ class SecuretyConfig : WebSecurityConfigurerAdapter() {
     //SecurityContextPersistenceFilter
     override fun configure(http: HttpSecurity) {
         // TODO ты вообще вменяемый??
-        http.addFilterAt(firebaseFilter, SecurityContextPersistenceFilter::class.java)
+        http.addFilterAt(FirebaseFilter(), SecurityContextPersistenceFilter::class.java)
             .csrf().disable()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

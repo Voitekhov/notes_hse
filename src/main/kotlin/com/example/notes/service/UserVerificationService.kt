@@ -24,6 +24,7 @@ class UserVerificationService {
             return (authentication.principal as User)
         }
         val user: User = userJPA.getByEmail(email)
+
         return user
     }
 
